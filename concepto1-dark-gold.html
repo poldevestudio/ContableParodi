@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudio Contable Patricia Parodi | Tigre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Base de colores: Desde negro profundo arriba hacia verde inglés rico abajo */
+      --bg-top: #050907;
+      --bg-mid: #0B1911;
+      --bg-bottom: #132B1D;
+      --bg-card: rgba(18, 38, 26, 0.65);
+      --bg-card-hover: rgba(24, 48, 33, 0.85);
+      /* Oro extraído exactamente del monograma y laureles del logo (#CDA746) */
+      --gold: #CDA746;
+      --gold-light: #E7CB7D;
+      --gold-subtle: rgba(205, 167, 70, 0.18);
+      --text: #F2F5F3;
+      --text-muted: #95A79C;
+      --border: rgba(205, 167, 70, 0.22);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-top);
+      background: linear-gradient(180deg, var(--bg-top) 0%, #070F0A 180px, var(--bg-mid) 500px, var(--bg-bottom) 100%);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header / Nav */
+    header {
+      padding: 32px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px var(--border), 0 4px 14px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+    }
+    .brand:hover .brand-logo {
+      transform: scale(1.04);
+    }
+    .brand-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      display: block;
+      margin-top: 3px;
+    }
+    .badge-location {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      background: rgba(14, 27, 19, 0.6);
+      padding: 6px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: inline-block;
+      font-weight: 500;
+    }
+    .hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.85rem;
+      font-weight: 400;
+      line-height: 1.18;
+      color: #FFFFFF;
+      margin-bottom: 22px;
+      letter-spacing: -0.5px;
+    }
+    .hero h2 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(205, 167, 70, 0.12);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      padding: 14px 34px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .cta-button:hover {
+      background: var(--gold);
+      color: #08110C;
+      box-shadow: 0 6px 24px rgba(205, 167, 70, 0.35);
+      transform: translateY(-2px);
+    }
+    .cta-button svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Áreas de Práctica / Servicios */
+    .services-section {
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .section-header {
+      margin-bottom: 36px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      padding: 30px 26px;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .service-card:hover {
+      border-color: var(--border);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 600;
+    }
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+    .service-card p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Info Bar / Despacho */
+    .info-bar {
+      margin: 50px 0;
+      padding: 32px 30px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .info-item h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .info-item p {
+      font-size: 0.95rem;
+      color: #FFFFFF;
+    }
+    .info-item span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer & Ética Profesional */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0 50px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .legal-matricula {
+      color: var(--gold-light);
+      letter-spacing: 1px;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 640px) {
+      .hero h2 { font-size: 2.2rem; }
+      header { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+      .brand { flex-direction: column; gap: 10px; }
+      .badge-location { margin-top: 4px; }
+      .cta-button { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a href="#" class="brand">
+        <img src="assets/logo-parodi.png" alt="Logo Estudio Contable Patricia Parodi" class="brand-logo">
+        <div class="brand-text">
+          <h1>Patricia Parodi</h1>
+          <span>Estudio Contable</span>
+        </div>
+      </a>
+      <div class="badge-location">Tigre Centro · Av. Cazón 1355</div>
+    </header>
+
+    <section class="hero">
+      <span class="hero-eyebrow">Asesoramiento & Gestión Tributaria</span>
+      <h2>Claridad tributaria para<br>empresas y <em>profesionales</em>.</h2>
+      <p>Tranquilidad contable, orden fiscal y planificación estratégica con la confidencialidad y el rigor que tu negocio necesita.</p>
+      <a href="https://wa.me/5491136154427" class="cta-button" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+        Iniciar Consulta por WhatsApp
+      </a>
+    </section>
+
+    <section class="services-section">
+      <div class="section-header">
+        <h3 class="section-title">Áreas de Práctica</h3>
+        <p class="section-subtitle">Servicios integrales adaptados al marco normativo vigente con atención personalizada.</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-num">I.</span>
+          <h3>Gestión Fiscal e Impositiva</h3>
+          <p>Monotributo, Responsable Inscripto, IVA, Ganancias y regímenes provinciales (ARBA / ARCA). Liquidación de Tasas de la Municipalidad de Tigre.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">II.</span>
+          <h3>Área Laboral & Haberes</h3>
+          <p>Liquidación mensual de sueldos, cargas sociales F.931, Libro de Sueldos Digital y altas/bajas tempranas ante organismos correspondientes.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">III.</span>
+          <h3>Balances & Estados Contables</h3>
+          <p>Confección y auditoría de Estados Contables anuales, certificaciones de ingresos y asesoramiento integral para entidades bancarias.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">IV.</span>
+          <h3>Sociedades Comerciales</h3>
+          <p>Inscripción y constitución de SRL, S.A. y SAS ante la Dirección Provincial de Personas Jurídicas (DPPJ) y reformas estatutarias.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="info-bar">
+      <div class="info-item">
+        <h4>Ubicación</h4>
+        <p>Av. Daniel M. Cazón 1355</p>
+        <span>Tigre Centro · Buenos Aires</span>
+      </div>
+      <div class="info-item">
+        <h4>Atención</h4>
+        <p>Lunes a Viernes</p>
+        <span>10:00 a 14:00 hs (o cita previa)</span>
+      </div>
+      <div class="info-item">
+        <h4>Línea Directa</h4>
+        <p>+54 9 11 3615-4427</p>
+        <span>Atención a clientes y consultas</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 Estudio Contable Patricia Parodi. Todos los derechos reservados.</p>
+      <p class="legal-matricula">Contadora Pública · Matrícula CPCEPBA Tº [XX] Fº [XX] · Delegación San Isidro / Tigre</p>
+    </footer>
+  </div>
+
+</body>
+</html>
