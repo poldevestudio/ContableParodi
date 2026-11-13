@@ -212,45 +212,118 @@
       font-size: 0.85rem;
       color: var(--text-muted);
     }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+    /* Servicios Accordion / Desplegable Simple y Elegante */
+    .services-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 820px;
+      margin: 0 auto;
     }
-    .service-card {
+    .service-accordion-item {
       background: var(--bg-card);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid var(--border-subtle);
-      padding: 30px 26px;
       border-radius: 6px;
-      transition: all 0.25s ease;
-      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
     }
-    .service-card:hover {
+    .service-accordion-item:hover {
       border-color: var(--border);
       background: var(--bg-card-hover);
-      transform: translateY(-3px);
     }
-    .service-num {
+    .service-accordion-item.active {
+      border-color: rgba(205, 167, 70, 0.4);
+      background: rgba(20, 42, 29, 0.75);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .service-accordion-header {
+      width: 100%;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #FFFFFF;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+    }
+    .service-accordion-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      color: var(--gold);
-      margin-bottom: 12px;
-      display: block;
-      font-weight: 600;
-    }
-    .service-card h3 {
-      font-size: 1.05rem;
+      font-size: 1.35rem;
       font-weight: 500;
       color: #FFFFFF;
-      margin-bottom: 10px;
       letter-spacing: 0.3px;
+      margin: 0;
+      transition: color 0.2s ease;
     }
-    .service-card p {
-      font-size: 0.86rem;
+    .service-accordion-item.active .service-accordion-title {
+      color: var(--gold-light);
+    }
+    .service-accordion-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(205, 167, 70, 0.08);
+      border: 1px solid rgba(205, 167, 70, 0.25);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, border-color 0.2s;
+    }
+    .service-accordion-item.active .service-accordion-icon {
+      transform: rotate(180deg);
+      background: var(--gold);
+      color: #08110C;
+    }
+    .service-accordion-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+    .service-accordion-item.active .service-accordion-content {
+      max-height: 600px;
+      opacity: 1;
+    }
+    .service-accordion-body {
+      padding: 0 24px 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 16px;
+    }
+    .service-accordion-desc {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
+      margin-bottom: 14px;
+      font-weight: 300;
+    }
+    .service-accordion-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 20px;
+    }
+    .service-accordion-list li {
+      font-size: 0.82rem;
+      color: #D3DFD8;
+      position: relative;
+      padding-left: 16px;
+      line-height: 1.5;
+    }
+    .service-accordion-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
     }
 
     /* Info Bar / Despacho */
@@ -765,6 +838,10 @@
       .clients-grid { grid-template-columns: 1fr; gap: 18px; }
       .clients-section { padding: 50px 0 55px; }
       .clients-title { font-size: 1.8rem; }
+      .service-accordion-header { padding: 16px 18px; }
+      .service-accordion-title { font-size: 1.18rem; }
+      .service-accordion-body { padding: 0 18px 18px; }
+      .service-accordion-list { grid-template-columns: 1fr; gap: 8px; }
     }
   </style>
 </head>
@@ -811,26 +888,105 @@
         <p class="section-subtitle">Objetivos y personalizados orientados a personas humanas y jurídicas.</p>
       </div>
       
-      <div class="services-grid">
-        <div class="service-card">
-          <span class="service-num">I.</span>
-          <h3>Gestión Fiscal e Impositiva</h3>
-          <p>Monotributo, Responsable Inscripto, IVA, Ganancias y regímenes provinciales (ARBA / ARCA). Liquidación de Tasas de la Municipalidad de Tigre.</p>
+      <div class="services-accordion">
+        <!-- Servicio: Gestión Fiscal e Impositiva -->
+        <div class="service-accordion-item active">
+          <button type="button" class="service-accordion-header" aria-expanded="true" onclick="toggleService(this)">
+            <h4 class="service-accordion-title">Gestión Fiscal e Impositiva</h4>
+            <span class="service-accordion-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M7 10l5 5 5-5z"/>
+              </svg>
+            </span>
+          </button>
+          <div class="service-accordion-content">
+            <div class="service-accordion-body">
+              <p class="service-accordion-desc">Asesoramiento impositivo estratégico y cumplimiento continuo ante organismos nacionales, provinciales y municipales.</p>
+              <ul class="service-accordion-list">
+                <li>Liquidación mensual de IVA y regímenes informativos</li>
+                <li>Impuesto a las Ganancias y Bienes Personales</li>
+                <li>Monotributo: altas, recategorizaciones y facturación</li>
+                <li>Regímenes ARBA / ARCA (Convenio Multilateral)</li>
+                <li>Tasas y tributos de la Municipalidad de Tigre</li>
+                <li>Atención de intimaciones y planes de facilidades de pago</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="service-card">
-          <span class="service-num">II.</span>
-          <h3>Área Laboral & Haberes</h3>
-          <p>Liquidación mensual de sueldos, cargas sociales F.931, Libro de Sueldos Digital y altas/bajas tempranas ante organismos correspondientes.</p>
+
+        <!-- Servicio: Área Laboral & Haberes -->
+        <div class="service-accordion-item">
+          <button type="button" class="service-accordion-header" aria-expanded="false" onclick="toggleService(this)">
+            <h4 class="service-accordion-title">Área Laboral & Haberes</h4>
+            <span class="service-accordion-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M7 10l5 5 5-5z"/>
+              </svg>
+            </span>
+          </button>
+          <div class="service-accordion-content">
+            <div class="service-accordion-body">
+              <p class="service-accordion-desc">Liquidación integral de nómina y cumplimiento previsional con total reserva y precisión técnica.</p>
+              <ul class="service-accordion-list">
+                <li>Liquidación mensual de sueldos y jornales por convenio</li>
+                <li>Confección de Cargas Sociales y Formulario 931</li>
+                <li>Libro de Sueldos Digital (LSD) ante ARCA</li>
+                <li>Altas, bajas y modificaciones en Mi Simplificación</li>
+                <li>Certificaciones de servicios y art. 80 LCT</li>
+                <li>Asesoramiento preventivo en encuadre laboral</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="service-card">
-          <span class="service-num">III.</span>
-          <h3>Balances & Estados Contables</h3>
-          <p>Confección y auditoría de Estados Contables anuales, certificaciones de ingresos y manifestación de bienes ante entidades bancarias.</p>
+
+        <!-- Servicio: Balances & Estados Contables -->
+        <div class="service-accordion-item">
+          <button type="button" class="service-accordion-header" aria-expanded="false" onclick="toggleService(this)">
+            <h4 class="service-accordion-title">Balances & Estados Contables</h4>
+            <span class="service-accordion-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M7 10l5 5 5-5z"/>
+              </svg>
+            </span>
+          </button>
+          <div class="service-accordion-content">
+            <div class="service-accordion-body">
+              <p class="service-accordion-desc">Confección y auditoría de información contable bajo normas profesionales vigentes de la FACPCE y CPCEPBA.</p>
+              <ul class="service-accordion-list">
+                <li>Estados Contables anuales completos y anexos</li>
+                <li>Auditoría externa con informe profesional certificado</li>
+                <li>Certificaciones de ingresos personales y comerciales</li>
+                <li>Manifestaciones de bienes certificadas ante el Consejo</li>
+                <li>Informes especiales para entidades bancarias y créditos</li>
+                <li>Revalúos y ajustes por inflación contable</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="service-card">
-          <span class="service-num">IV.</span>
-          <h3>Sociedades Comerciales</h3>
-          <p>Inscripción y constitución de SRL, S.A. y SAS ante la Dirección Provincial de Personas Jurídicas (DPPJ) y reformas estatutarias.</p>
+
+        <!-- Servicio: Sociedades Comerciales -->
+        <div class="service-accordion-item">
+          <button type="button" class="service-accordion-header" aria-expanded="false" onclick="toggleService(this)">
+            <h4 class="service-accordion-title">Sociedades Comerciales</h4>
+            <span class="service-accordion-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M7 10l5 5 5-5z"/>
+              </svg>
+            </span>
+          </button>
+          <div class="service-accordion-content">
+            <div class="service-accordion-body">
+              <p class="service-accordion-desc">Asistencia técnica para la formalización, estructuración y vida jurídica de entes comerciales.</p>
+              <ul class="service-accordion-list">
+                <li>Constitución e inscripción de SRL, S.A. y SAS ante la DPPJ</li>
+                <li>Modificaciones estatutarias y aumentos de capital social</li>
+                <li>Inscripción y renovación de autoridades societarias</li>
+                <li>Rúbrica y custodia de libros societarios y contables</li>
+                <li>Transformaciones, fusiones y disoluciones</li>
+                <li>Gestión de trámites y cumplimientos periódicos</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1045,6 +1201,12 @@
 </div>
 
   <script>
+    function toggleService(btn) {
+      const item = btn.closest('.service-accordion-item');
+      const isExpanded = item.classList.toggle('active');
+      btn.setAttribute('aria-expanded', isExpanded);
+    }
+
     function toggleCredential() {
       const drawer = document.getElementById('credentialDrawer');
       const btn = document.getElementById('credentialToggle');
