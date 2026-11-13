@@ -851,6 +851,63 @@
       display: block;
     }
 
+    /* ==========================================================================
+       Scroll Reveal Animations (Quiet Luxury Smooth Transitions)
+       ========================================================================== */
+    html, body {
+      overflow-x: hidden;
+    }
+
+    /* Estado inicial de revelado en scroll (solo si JS está activo) */
+    .has-scroll-reveal .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .has-scroll-reveal .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Entrada de Izquierda a Derecha para Práctica Profesional (Título y Encabezado) */
+    .has-scroll-reveal .reveal-from-left {
+      opacity: 0;
+      transform: translateX(-48px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .has-scroll-reveal .reveal-from-left.is-revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Delays escalonados para efecto en cascada sutil */
+    .delay-1 { transition-delay: 0.12s !important; }
+    .delay-2 { transition-delay: 0.24s !important; }
+    .delay-3 { transition-delay: 0.36s !important; }
+    .delay-4 { transition-delay: 0.48s !important; }
+
+    @media (max-width: 640px) {
+      .has-scroll-reveal .reveal-from-left {
+        transform: translateX(-32px);
+      }
+      .has-scroll-reveal .reveal-on-scroll {
+        transform: translateY(18px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .has-scroll-reveal .reveal-on-scroll,
+      .has-scroll-reveal .reveal-from-left {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
     /* Mobile adjustments */
     @media (max-width: 640px) {
       .hero { padding: 42px 0 35px; }
@@ -912,22 +969,22 @@
 
     <!-- Sección Sobre el Estudio (Fórmula oficial CPCEPBA) -->
     <section class="about-section">
-      <span class="section-eyebrow">Práctica Profesional Matriculada</span>
-      <h3 class="about-title">Rigor técnico, mesura y compromiso profesional</h3>
-      <p class="about-text">
+      <span class="section-eyebrow reveal-from-left">Práctica Profesional Matriculada</span>
+      <h3 class="about-title reveal-from-left delay-1">Rigor técnico, mesura y compromiso profesional</h3>
+      <p class="about-text reveal-on-scroll delay-2">
         <strong>Patricia Parodi, Contadora Pública</strong> (Tomo 116, Folio 107, Consejo Profesional de Ciencias Económicas de la Provincia de Buenos Aires - CPCEPBA), brinda servicios de asesoramiento tributario, gestión laboral, confección de estados contables y consultoría societaria a empresas, comercios y profesionales de Tigre y la región, bajo estrictos estándares de secreto profesional y cumplimiento normativo.
       </p>
     </section>
 
     <section class="services-section">
-      <div class="section-header">
+      <div class="section-header reveal-on-scroll">
         <h3 class="section-title">Servicios</h3>
         <p class="section-subtitle">Objetivos y personalizados orientados a personas humanas y jurídicas.</p>
       </div>
       
       <div class="services-accordion">
         <!-- Servicio: Gestión Fiscal e Impositiva -->
-        <div class="service-accordion-item active">
+        <div class="service-accordion-item active reveal-on-scroll">
           <button type="button" class="service-accordion-header" aria-expanded="true" onclick="toggleService(this)">
             <h4 class="service-accordion-title">Gestión Fiscal e Impositiva</h4>
             <span class="service-accordion-icon">
@@ -952,7 +1009,7 @@
         </div>
 
         <!-- Servicio: Área Laboral & Haberes -->
-        <div class="service-accordion-item">
+        <div class="service-accordion-item reveal-on-scroll delay-1">
           <button type="button" class="service-accordion-header" aria-expanded="false" onclick="toggleService(this)">
             <h4 class="service-accordion-title">Área Laboral & Haberes</h4>
             <span class="service-accordion-icon">
@@ -977,7 +1034,7 @@
         </div>
 
         <!-- Servicio: Balances & Estados Contables -->
-        <div class="service-accordion-item">
+        <div class="service-accordion-item reveal-on-scroll delay-2">
           <button type="button" class="service-accordion-header" aria-expanded="false" onclick="toggleService(this)">
             <h4 class="service-accordion-title">Balances & Estados Contables</h4>
             <span class="service-accordion-icon">
@@ -1002,7 +1059,7 @@
         </div>
 
         <!-- Servicio: Sociedades Comerciales -->
-        <div class="service-accordion-item">
+        <div class="service-accordion-item reveal-on-scroll delay-3">
           <button type="button" class="service-accordion-header" aria-expanded="false" onclick="toggleService(this)">
             <h4 class="service-accordion-title">Sociedades Comerciales</h4>
             <span class="service-accordion-icon">
@@ -1035,7 +1092,7 @@
      ========================================================================== -->
 <section class="clients-section">
   <div class="container">
-    <div class="clients-header">
+    <div class="clients-header reveal-on-scroll">
       <span class="clients-eyebrow">Asesoramiento a Medida</span>
       <h3 class="clients-title">Tipo de Clientes</h3>
       <p class="clients-subtitle">Soluciones impositivas, contables y laborales adaptadas a la escala y actividad de cada contribuyente.</p>
@@ -1043,7 +1100,7 @@
 
     <div class="clients-grid">
       <!-- Tarjeta 1: Monotributistas -->
-      <div class="client-card">
+      <div class="client-card reveal-on-scroll">
         <div class="client-icon-wrap">
           <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -1062,7 +1119,7 @@
       </div>
 
       <!-- Tarjeta 2: Autónomos -->
-      <div class="client-card">
+      <div class="client-card reveal-on-scroll delay-1">
         <div class="client-icon-wrap">
           <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -1082,7 +1139,7 @@
       </div>
 
       <!-- Tarjeta 3: Sociedades -->
-      <div class="client-card">
+      <div class="client-card reveal-on-scroll delay-2">
         <div class="client-icon-wrap">
           <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -1108,7 +1165,7 @@
 <!-- Sección Inferior (Fondo Oscuro Luxury: Despacho y Pie de Página) -->
 <div class="bottom-wrap">
   <div class="container">
-    <div class="info-bar">
+    <div class="info-bar reveal-on-scroll">
       <div class="info-item">
         <h4>Ubicación</h4>
         <p>Av. Daniel M. Cazón 1355</p>
@@ -1133,13 +1190,13 @@
 
     <!-- Pie de página con estructura obligatoria CPCEPBA -->
     <footer>
-      <p class="footer-brand">Estudio Contable Parodi</p>
-      <p class="legal-matricula">
+      <p class="footer-brand reveal-on-scroll">Estudio Contable Parodi</p>
+      <p class="legal-matricula reveal-on-scroll delay-1">
         Patricia Parodi, Contadora Pública (Tomo 116, Folio 107, Consejo Profesional de Ciencias Económicas de la Provincia de Buenos Aires - CPCEPBA)
       </p>
 
       <!-- Botón Desplegable Credencial Oficial CPCEPBA (Sobrio y minimalista, sin burbuja de color) -->
-      <div class="credential-trigger-wrap">
+      <div class="credential-trigger-wrap reveal-on-scroll delay-2">
         <button type="button" class="credential-toggle-btn" id="credentialToggle" aria-expanded="false" onclick="toggleCredential()">
           <span class="cert-icon-shield">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -1238,6 +1295,36 @@
 </div>
 
   <script>
+    // Activar sistema de revelado por scroll
+    document.documentElement.classList.add('has-scroll-reveal');
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-from-left');
+      
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.08,
+          rootMargin: '0px 0px -30px 0px'
+        });
+
+        revealElements.forEach(function(el) {
+          revealObserver.observe(el);
+        });
+      } else {
+        // Fallback si no hay soporte de IntersectionObserver
+        revealElements.forEach(function(el) {
+          el.classList.add('is-revealed');
+        });
+      }
+    });
+
     function toggleService(btn) {
       const item = btn.closest('.service-accordion-item');
       const isExpanded = item.classList.toggle('active');
