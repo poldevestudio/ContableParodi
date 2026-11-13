@@ -1,882 +1,852 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estudio Contable Patricia Parodi | Tigre</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Base de colores: Desde negro profundo arriba hacia verde inglés rico abajo */
-      --bg-top: #050907;
-      --bg-mid: #0B1911;
-      --bg-bottom: #132B1D;
-      --bg-card: rgba(18, 38, 26, 0.65);
-      --bg-card-hover: rgba(24, 48, 33, 0.85);
-      /* Oro extraído exactamente del monograma y laureles del logo (#CDA746) */
-      --gold: #CDA746;
-      --gold-light: #E7CB7D;
-      --gold-subtle: rgba(205, 167, 70, 0.18);
-      --text: #F2F5F3;
-      --text-muted: #95A79C;
-      --border: rgba(205, 167, 70, 0.22);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: var(--bg-top);
-      background: linear-gradient(180deg, var(--bg-top) 0%, #070F0A 180px, var(--bg-mid) 500px, var(--bg-bottom) 100%);
-      color: var(--text);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    
-    /* Header / Nav */
-    header {
-      padding: 32px 0 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      text-decoration: none;
-      color: inherit;
-    }
-    .brand-logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 0 1px var(--border), 0 4px 14px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
-    }
-    .brand:hover .brand-logo {
-      transform: scale(1.04);
-    }
-    .brand-text h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #FFFFFF;
-      line-height: 1.1;
-    }
-    .brand-text span {
-      font-size: 0.68rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      display: block;
-      margin-top: 3px;
-    }
-    .badge-location {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
-      background: rgba(14, 27, 19, 0.6);
-      padding: 6px 14px;
-      border-radius: 999px;
-      letter-spacing: 0.5px;
-    }
-    
-    /* Hero */
-    .hero {
-      padding: 70px 0 50px;
-      text-align: center;
-    }
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      color: var(--gold);
-      margin-bottom: 18px;
-      display: inline-block;
-      font-weight: 500;
-    }
-    .hero h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.85rem;
-      font-weight: 400;
-      line-height: 1.18;
-      color: #FFFFFF;
-      margin-bottom: 22px;
-      letter-spacing: -0.5px;
-    }
-    .hero h2 em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin: 0 auto 36px;
-      font-weight: 300;
-    }
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(205, 167, 70, 0.12);
-      color: var(--gold-light);
-      border: 1px solid var(--gold);
-      padding: 14px 34px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-    .cta-button:hover {
-      background: var(--gold);
-      color: #08110C;
-      box-shadow: 0 6px 24px rgba(205, 167, 70, 0.35);
-      transform: translateY(-2px);
-    }
-    .cta-button svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    /* Sección Sobre el Estudio (Alineada al Código de Ética CPCEPBA) */
-    .about-section {
-      padding: 50px 0 35px;
-      border-top: 1px solid var(--border-subtle);
-    }
-    .section-eyebrow {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 3.5px;
-      color: var(--gold);
-      margin-bottom: 12px;
-      display: inline-block;
-      font-weight: 500;
-    }
-    .about-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.85rem;
-      color: #FFFFFF;
-      margin-bottom: 16px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
-    .about-text {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      font-weight: 300;
-      max-width: 820px;
-    }
-    .about-text strong {
-      color: #FFFFFF;
-      font-weight: 500;
-    }
-
-    /* Áreas de Práctica / Servicios */
-    .services-section {
-      padding: 45px 0 40px;
-      border-top: 1px solid var(--border-subtle);
-    }
-    .section-header {
-      margin-bottom: 36px;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.85rem;
-      color: #FFFFFF;
-      margin-bottom: 8px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-    .section-subtitle {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .service-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--border-subtle);
-      padding: 30px 26px;
-      border-radius: 6px;
-      transition: all 0.25s ease;
-      position: relative;
-    }
-    .service-card:hover {
-      border-color: var(--border);
-      background: var(--bg-card-hover);
-      transform: translateY(-3px);
-    }
-    .service-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      color: var(--gold);
-      margin-bottom: 12px;
-      display: block;
-      font-weight: 600;
-    }
-    .service-card h3 {
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: #FFFFFF;
-      margin-bottom: 10px;
-      letter-spacing: 0.3px;
-    }
-    .service-card p {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* Info Bar / Despacho */
-    .info-bar {
-      margin: 50px 0;
-      padding: 32px 30px;
-      background: var(--bg-card);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--gold);
-      border-radius: 4px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 24px;
-    }
-    .info-item h4 {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      color: var(--gold);
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-    .info-item p {
-      font-size: 0.95rem;
-      color: #FFFFFF;
-    }
-    .info-item span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .info-item a {
-      color: #FFFFFF;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .info-item a:hover {
-      color: var(--gold-light);
-    }
-
-    /* Footer & Ética Profesional CPCEPBA */
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 40px 0 50px;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .footer-brand {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #FFFFFF;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    .legal-matricula {
-      color: var(--gold-light);
-      letter-spacing: 0.5px;
-      margin-top: 8px;
-      font-size: 0.83rem;
-      font-weight: 400;
-      line-height: 1.6;
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .footer-copy {
-      margin-top: 16px;
-      font-size: 0.74rem;
-      color: #6E7C73;
-    }
-
-    /* Credencial Oficial CPCEPBA (Desplegable Interactivo) */
-    .credential-trigger-wrap {
-      margin: 18px 0 6px;
-    }
-    .credential-toggle-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(205, 167, 70, 0.08);
-      border: 1px solid rgba(205, 167, 70, 0.35);
-      border-radius: 999px;
-      padding: 9px 22px;
-      color: var(--gold-light);
-      font-size: 0.78rem;
-      letter-spacing: 1px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-    }
-    .credential-toggle-btn:hover {
-      background: rgba(205, 167, 70, 0.16);
-      border-color: var(--gold);
-      color: #FFFFFF;
-      box-shadow: 0 4px 22px rgba(205, 167, 70, 0.25);
-      transform: translateY(-1px);
-    }
-    .cert-icon-shield {
-      display: inline-flex;
-      align-items: center;
-      color: var(--gold);
-    }
-    .cert-badge-active {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(46, 204, 113, 0.15);
-      border: 1px solid rgba(46, 204, 113, 0.35);
-      color: #5CDD93;
-      font-size: 0.68rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .cert-live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #2ECC71;
-      box-shadow: 0 0 6px #2ECC71;
-      animation: pulse-dot 2s infinite ease-in-out;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-    .cert-toggle-arrow {
-      color: var(--gold);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .credential-toggle-btn.active .cert-toggle-arrow {
-      transform: rotate(180deg);
-    }
-
-    /* Contenedor colapsable / desplegable */
-    .credential-drawer {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin 0.35s ease;
-      margin-top: 0;
-    }
-    .credential-drawer.active {
-      max-height: 1600px;
-      opacity: 1;
-      margin-top: 24px;
-      margin-bottom: 24px;
-    }
-
-    /* Tarjeta Oficial de Certificación (Estilo Luxury Dark & Gold) */
-    .credential-luxury-card {
-      max-width: 680px;
-      margin: 0 auto;
-      background: linear-gradient(150deg, #07150E 0%, #0E2519 50%, #08170F 100%);
-      border: 1px solid rgba(205, 167, 70, 0.32);
-      border-radius: 8px;
-      padding: 30px 28px 24px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 40px rgba(205, 167, 70, 0.08), inset 0 0 30px rgba(0, 0, 0, 0.4);
-      text-align: left;
-    }
-    .card-ornament-bg {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      pointer-events: none;
-      border: 1px solid rgba(205, 167, 70, 0.12);
-      margin: 5px;
-      border-radius: 5px;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(205, 167, 70, 0.2);
-      padding-bottom: 16px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .card-issuer-badge {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .issuer-name {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #FFFFFF;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .issuer-provincia {
-      display: block;
-      font-size: 0.68rem;
-      color: var(--gold);
-      letter-spacing: 0.6px;
-      margin-top: 2px;
-    }
-    .card-doc-type {
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--gold-light);
-      border: 1px solid rgba(205, 167, 70, 0.3);
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: rgba(205, 167, 70, 0.08);
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .card-body {
-      position: relative;
-      z-index: 1;
-    }
-    .card-cert-intro {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 400;
-      margin-bottom: 4px;
-    }
-    .card-prof-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.75rem;
-      color: #FFFFFF;
-      letter-spacing: 1.2px;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin: 4px 0 2px;
-      line-height: 1.2;
-    }
-    .card-prof-status {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-    }
-    .card-details-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-    .detail-box {
-      background: rgba(14, 34, 22, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 4px;
-      padding: 10px 14px;
-    }
-    .detail-label {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--gold);
-      margin-bottom: 4px;
-      font-weight: 500;
-      display: block;
-    }
-    .detail-value {
-      font-size: 0.9rem;
-      color: #FFFFFF;
-      font-weight: 400;
-    }
-    .detail-value.highlight-gold {
-      color: var(--gold-light);
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: 0.5px;
-    }
-    .validity-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(22, 68, 38, 0.85);
-      border: 1px solid rgba(205, 167, 70, 0.45);
-      color: #E7CB7D;
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-    .validity-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #2ECC71;
-      box-shadow: 0 0 6px #2ECC71;
-    }
-    .card-signatures {
-      display: flex;
-      justify-content: space-around;
-      gap: 24px;
-      border-top: 1px solid rgba(205, 167, 70, 0.2);
-      padding-top: 18px;
-      margin-top: 16px;
-      position: relative;
-      z-index: 1;
-    }
-    .sig-column {
-      text-align: center;
-      flex: 1;
-      max-width: 240px;
-    }
-    .sig-img {
-      height: 48px;
-      width: auto;
-      max-width: 100%;
-      object-fit: contain;
-      margin-bottom: 4px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    }
-    .sig-line {
-      height: 1px;
-      background: rgba(205, 167, 70, 0.35);
-      margin: 6px auto;
-      width: 85%;
-    }
-    .sig-name {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: #FFFFFF;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-    .sig-charge {
-      font-size: 0.63rem;
-      color: var(--gold);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-    .card-scan-link {
-      text-align: center;
-      margin-top: 20px;
-      padding-top: 14px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.08);
-      position: relative;
-      z-index: 1;
-    }
-    .btn-toggle-scan {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 0.74rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: inherit;
-      transition: color 0.2s;
-      padding: 6px 12px;
-      border-radius: 4px;
-    }
-    .btn-toggle-scan:hover {
-      color: var(--gold-light);
-      background: rgba(205, 167, 70, 0.08);
-    }
-    .scanned-doc-preview {
-      margin-top: 14px;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid rgba(205, 167, 70, 0.25);
-      background: #000;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    }
-    .scanned-doc-img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Mobile adjustments */
-    @media (max-width: 640px) {
-      .hero h2 { font-size: 2.2rem; }
-      header { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
-      .brand { flex-direction: column; gap: 10px; }
-      .badge-location { margin-top: 4px; }
-      .cta-button { width: 100%; justify-content: center; }
-      .info-bar { grid-template-columns: 1fr; }
-      .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-      .card-details-grid { grid-template-columns: 1fr; }
-      .card-signatures { flex-direction: column; align-items: center; gap: 16px; }
-      .sig-column { width: 100%; max-width: 220px; }
-      .credential-toggle-btn { width: 100%; justify-content: center; }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <header>
-      <a href="#" class="brand">
-        <img src="assets/logo-parodi.png" alt="Logo Estudio Contable Patricia Parodi" class="brand-logo">
-        <div class="brand-text">
-          <h1>Patricia Parodi</h1>
-          <span>Estudio Contable</span>
-        </div>
-      </a>
-      <div class="badge-location">Tigre Centro · Av. Cazón 1355</div>
-    </header>
-
-    <section class="hero">
-      <span class="hero-eyebrow">Asesoramiento & Gestión Tributaria</span>
-      <h2>Claridad tributaria para<br>empresas y <em>profesionales</em>.</h2>
-      <p>Tranquilidad contable, orden fiscal y planificación estratégica con la confidencialidad y el rigor que tu negocio necesita.</p>
-      <a href="https://wa.me/5491136154427" class="cta-button" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-        </svg>
-        Iniciar Consulta por WhatsApp
-      </a>
-    </section>
-
-    <!-- Sección Sobre el Estudio (Fórmula oficial CPCEPBA) -->
-    <section class="about-section">
-      <span class="section-eyebrow">Práctica Profesional Matriculada</span>
-      <h3 class="about-title">Rigor técnico, mesura y compromiso profesional</h3>
-      <p class="about-text">
-        <strong>Patricia Parodi, Contadora Pública</strong> (Tomo 116, Folio 107, Consejo Profesional de Ciencias Económicas de la Provincia de Buenos Aires - CPCEPBA), brinda servicios de asesoramiento tributario, gestión laboral, confección de estados contables y consultoría societaria a empresas, comercios y profesionales de Tigre y la región, bajo estrictos estándares de secreto profesional y cumplimiento normativo.
-      </p>
-    </section>
-
-    <section class="services-section">
-      <div class="section-header">
-        <h3 class="section-title">Áreas de Práctica</h3>
-        <p class="section-subtitle">Servicios objetivos y personalizados orientados a personas humanas y jurídicas.</p>
-      </div>
-      
-      <div class="services-grid">
-        <div class="service-card">
-          <span class="service-num">I.</span>
-          <h3>Gestión Fiscal e Impositiva</h3>
-          <p>Monotributo, Responsable Inscripto, IVA, Ganancias y regímenes provinciales (ARBA / ARCA). Liquidación de Tasas de la Municipalidad de Tigre.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-num">II.</span>
-          <h3>Área Laboral & Haberes</h3>
-          <p>Liquidación mensual de sueldos, cargas sociales F.931, Libro de Sueldos Digital y altas/bajas tempranas ante organismos correspondientes.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-num">III.</span>
-          <h3>Balances & Estados Contables</h3>
-          <p>Confección y auditoría de Estados Contables anuales, certificaciones de ingresos y manifestación de bienes ante entidades bancarias.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-num">IV.</span>
-          <h3>Sociedades Comerciales</h3>
-          <p>Inscripción y constitución de SRL, S.A. y SAS ante la Dirección Provincial de Personas Jurídicas (DPPJ) y reformas estatutarias.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="info-bar">
-      <div class="info-item">
-        <h4>Ubicación</h4>
-        <p>Av. Daniel M. Cazón 1355</p>
-        <span>Fondo 1° Piso · Tigre Centro</span>
-      </div>
-      <div class="info-item">
-        <h4>Atención</h4>
-        <p>Lunes a Viernes</p>
-        <span>10:00 a 14:00 hs (o cita previa)</span>
-      </div>
-      <div class="info-item">
-        <h4>Línea Directa</h4>
-        <p><a href="https://wa.me/5491136154427" target="_blank">+54 9 11 3615-4427</a></p>
-        <span>Consultas y turnos</span>
-      </div>
-      <div class="info-item">
-        <h4>Correo Oficial</h4>
-        <p><a href="mailto:consultas@estudiocontableparodi.com">consultas@estudiocontableparodi.com</a></p>
-        <span>Mesa de entrada</span>
-      </div>
-    </div>
-
-    <!-- Pie de página con estructura obligatoria CPCEPBA -->
-    <footer>
-      <p class="footer-brand">Estudio Contable Parodi</p>
-      <p class="legal-matricula">
-        Patricia Parodi, Contadora Pública (Tomo 116, Folio 107, Consejo Profesional de Ciencias Económicas de la Provincia de Buenos Aires - CPCEPBA)
-      </p>
-
-      <!-- Botón Desplegable Credencial Oficial CPCEPBA -->
-      <div class="credential-trigger-wrap">
-        <button type="button" class="credential-toggle-btn" id="credentialToggle" aria-expanded="false" onclick="toggleCredential()">
-          <span class="cert-icon-shield">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-            </svg>
-          </span>
-          <span class="cert-btn-label">Verificar Credencial Oficial CPCEPBA</span>
-          <span class="cert-badge-active">
-            <span class="cert-live-dot"></span>
-            Matrícula Activa
-          </span>
-          <svg class="cert-toggle-arrow" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M7 10l5 5 5-5z" fill="currentColor"/>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Desplegable con Tarjeta Oficial Luxury -->
-      <div class="credential-drawer" id="credentialDrawer">
-        <div class="credential-luxury-card">
-          <div class="card-ornament-bg"></div>
-
-          <!-- Encabezado Institucional -->
-          <div class="card-header">
-            <div class="card-issuer-badge">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--gold)">
-                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8l7 3.5v7.4l-7 3.5-7-3.5v-7.4l7-3.5z"/>
-              </svg>
-              <div>
-                <span class="issuer-name">Consejo Profesional de Ciencias Económicas</span>
-                <span class="issuer-provincia">Provincia de Buenos Aires · Ley 10.620</span>
-              </div>
-            </div>
-            <div class="card-doc-type">Certificación Matricular</div>
-          </div>
-
-          <!-- Cuerpo con datos oficiales del certificado -->
-          <div class="card-body">
-            <p class="card-cert-intro">Certifica que</p>
-            <h4 class="card-prof-name">Patricia Alejandra Parodi</h4>
-            <p class="card-prof-status">se encuentra legalmente inscripta al:</p>
-
-            <div class="card-details-grid">
-              <div class="detail-box">
-                <span class="detail-label">Tomo / Folio</span>
-                <span class="detail-value highlight-gold">T° 116 · F° 107</span>
-              </div>
-              <div class="detail-box">
-                <span class="detail-label">Título Habilitante</span>
-                <span class="detail-value">Contadora Pública</span>
-              </div>
-              <div class="detail-box">
-                <span class="detail-label">Fecha de Matriculación</span>
-                <span class="detail-value">18 de Junio de 2004</span>
-              </div>
-              <div class="detail-box">
-                <span class="detail-label">Estado de Validez</span>
-                <span class="validity-pill">
-                  <span class="validity-dot"></span>
-                  Vigente al 13/11/2026
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Firmas Oficiales Extraídas de Autoridades del Consejo -->
-          <div class="card-signatures">
-            <div class="sig-column">
-              <img src="assets/firma-aquino.png" alt="Firma Dr. Hugo A. Aquino" class="sig-img">
-              <div class="sig-line"></div>
-              <p class="sig-name">Dr. C.P. Hugo A. Aquino</p>
-              <p class="sig-charge">Secretario General</p>
-            </div>
-            <div class="sig-column">
-              <img src="assets/firma-barcia.png" alt="Firma Dra. Lucía S. Barcia" class="sig-img">
-              <div class="sig-line"></div>
-              <p class="sig-name">Dra. C.P. Lucía S. Barcia</p>
-              <p class="sig-charge">Presidente</p>
-            </div>
-          </div>
-
-          <!-- Vista de la Constancia Original Escaneada -->
-          <div class="card-scan-link">
-            <button type="button" class="btn-toggle-scan" onclick="toggleScanDoc(event)">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z"/>
-              </svg>
-              <span id="scanBtnText">Ver constancia original emitida por CPCEPBA</span>
-            </button>
-            <div class="scanned-doc-preview" id="scannedDocPreview" style="display: none;">
-              <img src="assets/certificado-cpcepba-original.jpg" alt="Constancia Matricular Original CPCEPBA" class="scanned-doc-img">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="footer-copy">© 2026 Estudio Contable Parodi · Delegación San Isidro / Tigre · Todos los derechos reservados.</p>
-    </footer>
-  </div>
-
-  <script>
-    function toggleCredential() {
-      const drawer = document.getElementById('credentialDrawer');
-      const btn = document.getElementById('credentialToggle');
-      const isExpanded = drawer.classList.toggle('active');
-      btn.classList.toggle('active', isExpanded);
-      btn.setAttribute('aria-expanded', isExpanded);
-      if (isExpanded) {
-        setTimeout(function() {
-          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 150);
-      }
-    }
-    function toggleScanDoc(e) {
-      e.stopPropagation();
-      const preview = document.getElementById('scannedDocPreview');
-      const btnText = document.getElementById('scanBtnText');
-      if (preview.style.display === 'none' || !preview.style.display) {
-        preview.style.display = 'block';
-        btnText.textContent = 'Ocultar constancia emitida';
-      } else {
-        preview.style.display = 'none';
-        btnText.textContent = 'Ver constancia original emitida por CPCEPBA';
-      }
-    }
-  </script>
-</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudio Contable Patricia Parodi | Tigre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Base de colores: Desde negro profundo arriba hacia verde inglés rico abajo */
+      --bg-top: #050907;
+      --bg-mid: #0B1911;
+      --bg-bottom: #132B1D;
+      --bg-card: rgba(18, 38, 26, 0.65);
+      --bg-card-hover: rgba(24, 48, 33, 0.85);
+      /* Oro extraído exactamente del monograma y laureles del logo (#CDA746) */
+      --gold: #CDA746;
+      --gold-light: #E7CB7D;
+      --gold-subtle: rgba(205, 167, 70, 0.18);
+      --text: #F2F5F3;
+      --text-muted: #95A79C;
+      --border: rgba(205, 167, 70, 0.22);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-top);
+      background: linear-gradient(180deg, var(--bg-top) 0%, #070F0A 180px, var(--bg-mid) 500px, var(--bg-bottom) 100%);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header / Nav */
+    header {
+      padding: 32px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px var(--border), 0 4px 14px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+    }
+    .brand:hover .brand-logo {
+      transform: scale(1.04);
+    }
+    .brand-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      display: block;
+      margin-top: 3px;
+    }
+    .badge-location {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      background: rgba(14, 27, 19, 0.6);
+      padding: 6px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: inline-block;
+      font-weight: 500;
+    }
+    .hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.85rem;
+      font-weight: 400;
+      line-height: 1.18;
+      color: #FFFFFF;
+      margin-bottom: 22px;
+      letter-spacing: -0.5px;
+    }
+    .hero h2 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(205, 167, 70, 0.12);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      padding: 14px 34px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .cta-button:hover {
+      background: var(--gold);
+      color: #08110C;
+      box-shadow: 0 6px 24px rgba(205, 167, 70, 0.35);
+      transform: translateY(-2px);
+    }
+    .cta-button svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Sección Sobre el Estudio (Alineada al Código de Ética CPCEPBA) */
+    .about-section {
+      padding: 50px 0 35px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 3.5px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: inline-block;
+      font-weight: 500;
+    }
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      font-weight: 300;
+      max-width: 820px;
+    }
+    .about-text strong {
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+
+    /* Áreas de Práctica / Servicios */
+    .services-section {
+      padding: 45px 0 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .section-header {
+      margin-bottom: 36px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      padding: 30px 26px;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .service-card:hover {
+      border-color: var(--border);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 600;
+    }
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+    .service-card p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Info Bar / Despacho */
+    .info-bar {
+      margin: 50px 0;
+      padding: 32px 30px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .info-item h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .info-item p {
+      font-size: 0.95rem;
+      color: #FFFFFF;
+    }
+    .info-item span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .info-item a {
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .info-item a:hover {
+      color: var(--gold-light);
+    }
+
+    /* Footer & Ética Profesional CPCEPBA */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0 50px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .footer-brand {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .legal-matricula {
+      color: var(--gold-light);
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+      font-size: 0.83rem;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer-copy {
+      margin-top: 16px;
+      font-size: 0.74rem;
+      color: #6E7C73;
+    }
+
+    /* Credencial Oficial CPCEPBA (Desplegable Interactivo) */
+    .credential-trigger-wrap {
+      margin: 18px 0 6px;
+    }
+    .credential-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(205, 167, 70, 0.08);
+      border: 1px solid rgba(205, 167, 70, 0.35);
+      border-radius: 999px;
+      padding: 9px 24px;
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .credential-toggle-btn:hover {
+      background: rgba(205, 167, 70, 0.16);
+      border-color: var(--gold);
+      color: #FFFFFF;
+      box-shadow: 0 4px 22px rgba(205, 167, 70, 0.25);
+      transform: translateY(-1px);
+    }
+    .cert-icon-shield {
+      display: inline-flex;
+      align-items: center;
+      color: var(--gold);
+    }
+    .cert-toggle-arrow {
+      color: var(--gold);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .credential-toggle-btn.active .cert-toggle-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Contenedor colapsable / desplegable */
+    .credential-drawer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin 0.35s ease;
+      margin-top: 0;
+    }
+    .credential-drawer.active {
+      max-height: 1600px;
+      opacity: 1;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* Tarjeta Oficial de Certificación (Estilo Luxury Dark & Gold) */
+    .credential-luxury-card {
+      max-width: 680px;
+      margin: 0 auto;
+      background: linear-gradient(150deg, #07150E 0%, #0E2519 50%, #08170F 100%);
+      border: 1px solid rgba(205, 167, 70, 0.32);
+      border-radius: 8px;
+      padding: 30px 28px 24px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 40px rgba(205, 167, 70, 0.08), inset 0 0 30px rgba(0, 0, 0, 0.4);
+      text-align: left;
+    }
+    .card-ornament-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+      border: 1px solid rgba(205, 167, 70, 0.12);
+      margin: 5px;
+      border-radius: 5px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(205, 167, 70, 0.2);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .card-issuer-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .issuer-name {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .issuer-provincia {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.6px;
+      margin-top: 2px;
+    }
+    .card-doc-type {
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+      border: 1px solid rgba(205, 167, 70, 0.3);
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(205, 167, 70, 0.08);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .card-body {
+      position: relative;
+      z-index: 1;
+    }
+    .card-cert-intro {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .card-prof-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      color: #FFFFFF;
+      letter-spacing: 1.2px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 4px 0 2px;
+      line-height: 1.2;
+    }
+    .card-prof-status {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .card-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .detail-box {
+      background: rgba(14, 34, 22, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 4px;
+      padding: 10px 14px;
+    }
+    .detail-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      margin-bottom: 4px;
+      font-weight: 500;
+      display: block;
+    }
+    .detail-value {
+      font-size: 0.9rem;
+      color: #FFFFFF;
+      font-weight: 400;
+    }
+    .detail-value.highlight-gold {
+      color: var(--gold-light);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .validity-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(22, 68, 38, 0.85);
+      border: 1px solid rgba(205, 167, 70, 0.45);
+      color: #E7CB7D;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .validity-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2ECC71;
+      box-shadow: 0 0 6px #2ECC71;
+    }
+    .card-signatures {
+      display: flex;
+      justify-content: space-around;
+      gap: 24px;
+      border-top: 1px solid rgba(205, 167, 70, 0.2);
+      padding-top: 18px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .sig-column {
+      text-align: center;
+      flex: 1;
+      max-width: 240px;
+    }
+    .sig-img {
+      height: 48px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    .sig-line {
+      height: 1px;
+      background: rgba(205, 167, 70, 0.35);
+      margin: 6px auto;
+      width: 85%;
+    }
+    .sig-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .sig-charge {
+      font-size: 0.63rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .card-scan-link {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 1;
+    }
+    .btn-toggle-scan {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: inherit;
+      transition: color 0.2s;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+    .btn-toggle-scan:hover {
+      color: var(--gold-light);
+      background: rgba(205, 167, 70, 0.08);
+    }
+    .scanned-doc-preview {
+      margin-top: 14px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(205, 167, 70, 0.25);
+      background: #000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .scanned-doc-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 640px) {
+      .hero h2 { font-size: 2.2rem; }
+      header { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+      .brand { flex-direction: column; gap: 10px; }
+      .badge-location { margin-top: 4px; }
+      .cta-button { width: 100%; justify-content: center; }
+      .info-bar { grid-template-columns: 1fr; }
+      .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .card-details-grid { grid-template-columns: 1fr; }
+      .card-signatures { flex-direction: column; align-items: center; gap: 16px; }
+      .sig-column { width: 100%; max-width: 220px; }
+      .credential-toggle-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a href="#" class="brand">
+        <img src="assets/logo-parodi.png" alt="Logo Estudio Contable Patricia Parodi" class="brand-logo">
+        <div class="brand-text">
+          <h1>Patricia Parodi</h1>
+          <span>Estudio Contable</span>
+        </div>
+      </a>
+      <div class="badge-location">Tigre Centro · Av. Cazón 1355</div>
+    </header>
+
+    <section class="hero">
+      <span class="hero-eyebrow">Asesoramiento & Gestión Tributaria</span>
+      <h2>Claridad tributaria para<br>empresas y <em>profesionales</em>.</h2>
+      <p>Tranquilidad contable, orden fiscal y planificación estratégica con la confidencialidad y el rigor que tu negocio necesita.</p>
+      <a href="https://wa.me/5491136154427" class="cta-button" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+        Iniciar Consulta por WhatsApp
+      </a>
+    </section>
+
+    <!-- Sección Sobre el Estudio (Fórmula oficial CPCEPBA) -->
+    <section class="about-section">
+      <span class="section-eyebrow">Práctica Profesional Matriculada</span>
+      <h3 class="about-title">Rigor técnico, mesura y compromiso profesional</h3>
+      <p class="about-text">
+        <strong>Patricia Parodi, Contadora Pública</strong> (Tomo 116, Folio 107, Consejo Profesional de Ciencias Económicas de la Provincia de Buenos Aires - CPCEPBA), brinda servicios de asesoramiento tributario, gestión laboral, confección de estados contables y consultoría societaria a empresas, comercios y profesionales de Tigre y la región, bajo estrictos estándares de secreto profesional y cumplimiento normativo.
+      </p>
+    </section>
+
+    <section class="services-section">
+      <div class="section-header">
+        <h3 class="section-title">Áreas de Práctica</h3>
+        <p class="section-subtitle">Servicios objetivos y personalizados orientados a personas humanas y jurídicas.</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-num">I.</span>
+          <h3>Gestión Fiscal e Impositiva</h3>
+          <p>Monotributo, Responsable Inscripto, IVA, Ganancias y regímenes provinciales (ARBA / ARCA). Liquidación de Tasas de la Municipalidad de Tigre.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">II.</span>
+          <h3>Área Laboral & Haberes</h3>
+          <p>Liquidación mensual de sueldos, cargas sociales F.931, Libro de Sueldos Digital y altas/bajas tempranas ante organismos correspondientes.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">III.</span>
+          <h3>Balances & Estados Contables</h3>
+          <p>Confección y auditoría de Estados Contables anuales, certificaciones de ingresos y manifestación de bienes ante entidades bancarias.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">IV.</span>
+          <h3>Sociedades Comerciales</h3>
+          <p>Inscripción y constitución de SRL, S.A. y SAS ante la Dirección Provincial de Personas Jurídicas (DPPJ) y reformas estatutarias.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="info-bar">
+      <div class="info-item">
+        <h4>Ubicación</h4>
+        <p>Av. Daniel M. Cazón 1355</p>
+        <span>Fondo 1° Piso · Tigre Centro</span>
+      </div>
+      <div class="info-item">
+        <h4>Atención</h4>
+        <p>Lunes a Viernes</p>
+        <span>10:00 a 14:00 hs (o cita previa)</span>
+      </div>
+      <div class="info-item">
+        <h4>Línea Directa</h4>
+        <p><a href="https://wa.me/5491136154427" target="_blank">+54 9 11 3615-4427</a></p>
+        <span>Consultas y turnos</span>
+      </div>
+      <div class="info-item">
+        <h4>Correo Oficial</h4>
+        <p><a href="mailto:consultas@estudiocontableparodi.com">consultas@estudiocontableparodi.com</a></p>
+        <span>Mesa de entrada</span>
+      </div>
+    </div>
+
+    <!-- Pie de página con estructura obligatoria CPCEPBA -->
+    <footer>
+      <p class="footer-brand">Estudio Contable Parodi</p>
+      <p class="legal-matricula">
+        Patricia Parodi, Contadora Pública (Tomo 116, Folio 107, Consejo Profesional de Ciencias Económicas de la Provincia de Buenos Aires - CPCEPBA)
+      </p>
+
+      <!-- Botón Desplegable Credencial Oficial CPCEPBA (Sobrio y minimalista, sin burbuja de color) -->
+      <div class="credential-trigger-wrap">
+        <button type="button" class="credential-toggle-btn" id="credentialToggle" aria-expanded="false" onclick="toggleCredential()">
+          <span class="cert-icon-shield">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+            </svg>
+          </span>
+          <span class="cert-btn-label">Verificar Credencial Oficial CPCEPBA</span>
+          <svg class="cert-toggle-arrow" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M7 10l5 5 5-5z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desplegable con Tarjeta Oficial Luxury -->
+      <div class="credential-drawer" id="credentialDrawer">
+        <div class="credential-luxury-card">
+          <div class="card-ornament-bg"></div>
+
+          <!-- Encabezado Institucional -->
+          <div class="card-header">
+            <div class="card-issuer-badge">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--gold)">
+                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8l7 3.5v7.4l-7 3.5-7-3.5v-7.4l7-3.5z"/>
+              </svg>
+              <div>
+                <span class="issuer-name">Consejo Profesional de Ciencias Económicas</span>
+                <span class="issuer-provincia">Provincia de Buenos Aires · Ley 10.620</span>
+              </div>
+            </div>
+            <div class="card-doc-type">Certificación Matricular</div>
+          </div>
+
+          <!-- Cuerpo con datos oficiales del certificado -->
+          <div class="card-body">
+            <p class="card-cert-intro">Certifica que</p>
+            <h4 class="card-prof-name">Patricia Alejandra Parodi</h4>
+            <p class="card-prof-status">se encuentra legalmente inscripta al:</p>
+
+            <div class="card-details-grid">
+              <div class="detail-box">
+                <span class="detail-label">Tomo / Folio</span>
+                <span class="detail-value highlight-gold">T° 116 · F° 107</span>
+              </div>
+              <div class="detail-box">
+                <span class="detail-label">Título Habilitante</span>
+                <span class="detail-value">Contadora Pública</span>
+              </div>
+              <div class="detail-box">
+                <span class="detail-label">Fecha de Matriculación</span>
+                <span class="detail-value">18 de Junio de 2004</span>
+              </div>
+              <div class="detail-box">
+                <span class="detail-label">Estado de Validez</span>
+                <span class="validity-pill">
+                  <span class="validity-dot"></span>
+                  Vigente al 13/11/2026
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Firmas Oficiales Extraídas de Autoridades del Consejo -->
+          <div class="card-signatures">
+            <div class="sig-column">
+              <img src="assets/firma-aquino.png" alt="Firma Dr. Hugo A. Aquino" class="sig-img">
+              <div class="sig-line"></div>
+              <p class="sig-name">Dr. C.P. Hugo A. Aquino</p>
+              <p class="sig-charge">Secretario General</p>
+            </div>
+            <div class="sig-column">
+              <img src="assets/firma-barcia.png" alt="Firma Dra. Lucía S. Barcia" class="sig-img">
+              <div class="sig-line"></div>
+              <p class="sig-name">Dra. C.P. Lucía S. Barcia</p>
+              <p class="sig-charge">Presidente</p>
+            </div>
+          </div>
+
+          <!-- Vista de la Constancia Original Escaneada -->
+          <div class="card-scan-link">
+            <button type="button" class="btn-toggle-scan" onclick="toggleScanDoc(event)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z"/>
+              </svg>
+              <span id="scanBtnText">Ver constancia original emitida por CPCEPBA</span>
+            </button>
+            <div class="scanned-doc-preview" id="scannedDocPreview" style="display: none;">
+              <img src="assets/certificado-cpcepba-original.jpg" alt="Constancia Matricular Original CPCEPBA" class="scanned-doc-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-copy">© 2026 Estudio Contable Parodi · Delegación San Isidro / Tigre · Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleCredential() {
+      const drawer = document.getElementById('credentialDrawer');
+      const btn = document.getElementById('credentialToggle');
+      const isExpanded = drawer.classList.toggle('active');
+      btn.classList.toggle('active', isExpanded);
+      btn.setAttribute('aria-expanded', isExpanded);
+      if (isExpanded) {
+        setTimeout(function() {
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 150);
+      }
+    }
+    function toggleScanDoc(e) {
+      e.stopPropagation();
+      const preview = document.getElementById('scannedDocPreview');
+      const btnText = document.getElementById('scanBtnText');
+      if (preview.style.display === 'none' || !preview.style.display) {
+        preview.style.display = 'block';
+        btnText.textContent = 'Ocultar constancia emitida';
+      } else {
+        preview.style.display = 'none';
+        btnText.textContent = 'Ver constancia original emitida por CPCEPBA';
+      }
+    }
+  </script>
+</body>
 </html>
