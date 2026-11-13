@@ -109,6 +109,33 @@
       display: inline-block;
       font-weight: 500;
     }
+    .hero-handshake-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--gold);
+    }
+    .hero-handshake-wrap::before,
+    .hero-handshake-wrap::after {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(205, 167, 70, 0.5));
+      margin: 0 14px;
+    }
+    .hero-handshake-wrap::after {
+      background: linear-gradient(90deg, rgba(205, 167, 70, 0.5), transparent);
+    }
+    .hero-handshake-icon {
+      filter: drop-shadow(0 2px 8px rgba(205, 167, 70, 0.35));
+      transition: transform 0.3s ease;
+    }
+    .hero-handshake-wrap:hover .hero-handshake-icon {
+      transform: scale(1.08);
+    }
+
     .hero h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.85rem;
@@ -825,6 +852,9 @@
     /* Mobile adjustments */
     @media (max-width: 640px) {
       .hero { padding: 42px 0 35px; }
+      .hero-handshake-wrap { margin-bottom: 14px; }
+      .hero-handshake-wrap::before,
+      .hero-handshake-wrap::after { width: 25px; margin: 0 10px; }
       .hero h2 { font-size: 2.2rem; }
       header { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
       .brand { flex-direction: column; gap: 10px; }
@@ -863,8 +893,19 @@
     </header>
 
     <section class="hero">
-      <h2>Claridad tributaria para<br>empresas y <em>profesionales</em>.</h2>
-      <p>Tranquilidad contable, orden fiscal y planificación estratégica con la confidencialidad y el rigor que tu negocio necesita.</p>
+      <div class="hero-handshake-wrap">
+        <svg class="hero-handshake-icon" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.6-4.6a2 2 0 0 0 0-2.8l-3.2-3.2a2 2 0 0 0-2.8 0L11 10.4"></path>
+          <path d="m18 10-4-4a2 2 0 0 0-2.8 0l-5.6 5.6a2 2 0 0 0 0 2.8l3.2 3.2a2 2 0 0 0 2.8 0L14 15"></path>
+          <path d="m13 13 2 2"></path>
+          <path d="m9 9 2 2"></path>
+          <path d="m15 15 2 2"></path>
+          <path d="m2 17 4-4"></path>
+          <path d="m22 7-4 4"></path>
+        </svg>
+      </div>
+      <h2>Tu tranquilidad,<br>nuestro <em>compromiso</em>.</h2>
+      <p>Asesoramiento contable, orden fiscal y planificación estratégica con la confidencialidad y el rigor que tu negocio necesita.</p>
       <a href="https://wa.me/5491136154427" class="cta-button" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
