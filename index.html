@@ -224,6 +224,20 @@
       color: #FFFFFF;
       font-weight: 500;
     }
+    .about-image-wrap {
+      margin-top: 26px;
+      max-width: 480px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(205, 167, 70, 0.35);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    }
+    .about-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
 
     /* Áreas de Práctica / Servicios */
     .services-section {
@@ -681,7 +695,7 @@
 
     <!-- Sección Sobre el Estudio (Fórmula oficial CPCEPBA) -->
     <section class="about-section">
-      <span class="section-eyebrow reveal-from-left">trayectoria</span>
+      <span class="section-eyebrow reveal-from-left" style="font-size: 1.1rem;">trayectoria</span>
       <p class="about-text reveal-on-scroll delay-2">
         <strong>Más de 20 años de matrícula</strong> asesorando a monotributistas, responsables inscriptos y sociedades, con atención directa.
       </p>
@@ -689,14 +703,14 @@
         <strong>2001:</strong> Título de contadora pública, universidad de Buenos Aires (UBA)
       </p>
       <p class="about-text reveal-on-scroll delay-2">
-        <strong>2004:</strong> Matrícula profesional. Desde entonces ejerzo la profesión, asesorando a monotributistas, responsables inscriptos y sociedades.
+        <strong>2004:</strong> Obtención de la matrícula profesional (CPCEPBA)A partir de ese momento y durante dos décadas trabajé en un estudio contable, asesorando a monotributistas, responsables inscriptos y sociedades.
       </p>
       <p class="about-text reveal-on-scroll delay-2">
-        <strong>20 años:</strong> Estudio contable. Trabajé en las distintas áreas de un estudio, con todo tipo de clientes.
+        <strong>2025 – a la actualidad:</strong> Estudio propio. Atención directa, con el respaldo y la experiencia de siempre.
       </p>
-      <p class="about-text reveal-on-scroll delay-2">
-        <strong>Hoy:</strong> Estudio propio. Atención directa, con la experiencia de siempre.
-      </p>
+      <div class="about-image-wrap reveal-on-scroll delay-3">
+        <img src="assets/EscritorioParodi.jpg" alt="Escritorio del Estudio Contable Patricia Parodi" class="about-image" loading="lazy">
+      </div>
     </section>
 
     <section class="services-section">
@@ -851,6 +865,7 @@
         <h4 class="client-card-title">Autónomos</h4>
         <p class="client-card-desc">Gestión tributaria integral.</p>
         <ul class="client-features-list">
+          <li>Altas, bajas y modificaciones en ARCA / ARBA</li>
           <li>Liquidación mensual de IVA e Ingresos Brutos</li>
           <li>Declaración jurada de Ganancias y Bienes Personales</li>
           <li>Convenio Multilateral y regímenes de retención</li>
@@ -873,6 +888,7 @@
         <h4 class="client-card-title">Sociedades</h4>
         <p class="client-card-desc">Soporte contable, societario y de nómina para PyMEs, empresas comerciales y corporaciones.</p>
         <ul class="client-features-list">
+          <li>Altas, bajas y modificaciones en ARCA / ARBA</li>
           <li>Constitución, reformas y trámites ante DPPJ</li>
           <li>Balances y Auditoría de Estados Contables anuales</li>
           <li>Liquidación de IVA, Ingresos brutos o convenio multilateral</li>          
